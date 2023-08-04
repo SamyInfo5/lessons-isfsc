@@ -5,7 +5,7 @@
 
 ## Quelque sites utils pour commencer
 
-1. [WordPress.org](https://wordpress.org/) (pour la doc en anglais)
+1. [WordPress.org](https://wordpress.org/) (pour la doc en anglais) 
 2. [wpfr](https://wpfr.net/) (pour la doc en français)
 3. [Grafikart](https://www.youtube.com/watch?v=fjm5jaQsvSw&list=PLjwdMgw5TTLWF1VV9TFWrsUTvWjtGS7Qt) (une suite de vidéos très complète sur l'utilisation de WordPress)
 
