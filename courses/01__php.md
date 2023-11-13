@@ -138,6 +138,59 @@ foreach($leTableau as $cle => $valeur) {
 ```
 Cette structure prend en paramètre le nom du tableau à parcourir puis les données qu'il faut récupérer (valeurs uniquement ou bien valeurs et clés). Dans la première syntaxe, la valeur de l'élément courant du tableau est directement assignée à la variable $valeur. Dans la seconde, la clé courante de l'élément du tableau est affectée à la variable $cle et sa valeur stockée dans la variable $valeur.
 
+### Quelques exemples de boucles:
+
+#### Boucle `for` :
+
+```php
+<?php
+for ($i = 0; $i < 5; $i++) {
+    echo $i . '<br />';
+}
+?>
+```
+
+Ce code affichera les nombres de 0 à 4.
+
+#### Boucle `while` :
+
+```php
+<?php
+$i = 0;
+while ($i < 5) {
+    echo $i . '<br />';
+    $i++;
+}
+?>
+```
+
+Ce code produira également les nombres de 0 à 4.
+
+#### Boucle à 2 dimensions avec une liste HTML :
+
+```php
+<?php
+$categories = [
+    'Fruits' => ['Pomme', 'Banane', 'Cerise'],
+    'Légumes' => ['Carotte', 'Brocoli']
+];
+
+echo '<ul>';
+foreach ($categories as $categorie => $items) {
+    echo '<li>' . $categorie;
+    echo '<ul>';
+    foreach ($items as $item) {
+        echo '<li>' . $item . '</li>';
+    }
+    echo '</ul>';
+    echo '</li>';
+}
+echo '</ul>';
+?>
+```
+
+Ce code produira une liste à deux niveaux affichant des catégories (Fruits et Légumes) et les items correspondants.
+
 > **Exercice**
 > Créez un tableau associatif contenant votre nom, prénom et âge. Utilisez une boucle foreach pour > afficher toutes les valeurs.
 
@@ -145,7 +198,8 @@ Cette structure prend en paramètre le nom du tableau à parcourir puis les donn
 ```php
 <?php 
  
-  // Calcul de la taille du tableau $legumes
+  // `sizeof()` Calcul de la taille du tableau $tailleLegumes
+  // on peut utiliser `count()`
   $tailleLegumes = sizeof($legumes);
  
   // Parcours du tableau
@@ -182,6 +236,7 @@ Le tag HTML `<pre>` préserve les espaces et les sauts de ligne qui sont présen
 ## Les conditions
 
 [PHP net](https://www.php.net/manual/fr/control-structures.if.php)
+[lab - vu en cours](https://github.com/Poulycroc/lessons-isfsc/blob/master/lab-2023/01_intro/conditions.php)
 
 #### Qu'est-ce que c'est ?
 Les structures de contrôle sont des éléments du langage qui altèrent le flux d'exécution en fonction de certaines conditions.
@@ -273,6 +328,30 @@ Comme nous l'avons vu dans le paragraphe consacré aux expressions, expression e
 #### Qu'est-ce que c'est ?
 Une fonction est une portion de code qui réalise une tâche précise et qui peut être appelée à n'importe quel endroit de votre programme, évitant ainsi de réécrire le même code plusieurs fois.
 
+Imaginons qu'une fonction soit comme une petite machine ou un outil dans une usine. Voici comment elle fonctionne schématiquement :
+
+```
+          +-------------------------+
+Entrée -> |                         | -> Sortie
+          |         Fonction        |
+Paramètre |                         | Résultat
+(s)       |          (Code)         |
+          +-------------------------+
+                |
+                v
+           Actions/Logique
+```
+
+1. **Entrée/Paramètre(s)** : Ces sont les informations que vous donnez à la fonction pour qu'elle puisse faire son travail. Dans l'exemple de code que vous avez donné précédemment, pour la fonction `salut`, le paramètre est `$nom`.
+
+2. **Fonction (Code)** : C'est ici que toutes les actions et la logique sont effectuées. C'est le cœur de la machine.
+
+3. **Sortie/Résultat** : Une fois que la fonction a traité les paramètres à l'aide de son code, elle produit généralement un résultat. Ce résultat est ce que renvoie la fonction. Pour certaines fonctions, comme `salut`, il n'y a pas de valeur renvoyée mais une action directe (affichage dans ce cas).
+
+4. **Actions/Logique** : C'est la partie du code à l'intérieur de la fonction qui traite l'entrée et produit la sortie. Par exemple, dans la fonction `moyenne`, la logique est de sommer tous les nombres et de diviser par leur nombre total pour obtenir la moyenne.
+
+L'idée principale derrière l'utilisation de fonctions est la modularité et la réutilisabilité. Au lieu d'écrire le même code encore et encore, vous pouvez l'écrire une fois dans une fonction et l'appeler autant de fois que nécessaire.
+
 #### Définition d'une fonction
 ```php
 <?php
@@ -288,6 +367,10 @@ Une fonction est une portion de code qui réalise une tâche précise et qui peu
 <?php
   salut('Hugo');
 ?>
+```
+Ce code affichera :
+```bash
+Salut Hugo
 ```
 > **Note**: Une fois la fonction définie, elle peut être appelée à n'importe quel endroit de votre programme en utilisant son nom suivi d'une paire de parenthèses.
 
@@ -315,3 +398,31 @@ Une fonction est une portion de code qui réalise une tâche précise et qui peu
 ?>
 ```
 > **Note**: Une fonction peut retourner une valeur en utilisant le mot-clé `return`. Cette valeur peut ensuite être utilisée ou stockée dans une variable.
+> **Note**: Les fonctions en PHP commencent toujours par le mot-clé function suivi du nom de la fonction. Les instructions de la fonction sont encadrées par des accolades `{` `}`. Pour appeler la fonction, utilisez son nom suivi de parenthèses.
+
+## Utilisation de `require()`
+
+Le mot-clé `require` en PHP est utilisé pour inclure et exécuter un fichier spécifié.
+
+Exemple de base :
+
+dans le fichier `functions.php`
+```php
+<?php
+function addition($a, $b) {
+    return $a + $b;
+}
+```
+
+dans le fichier `principal.php`
+```php
+<?php
+require 'functions.php';
+
+$resultat = addition(5, 10);
+echo "Le résultat est : " . $resultat;  // Affiche : Le résultat est : 15
+```
+
+Dans cet exemple, nous avons défini une fonction `addition` dans un fichier séparé `functions.php`. Nous utilisons ensuite `require` pour inclure ce fichier dans `principal.php`. Cela nous permet d'utiliser la fonction `addition` comme si elle était définie dans `principal.php`.
+
+> **Note**: Si le fichier spécifié dans `require()` ne peut pas être trouvé, PHP générera une erreur fatale et arrêtera l'exécution du script. Si vous souhaitez que le script continue à s'exécuter même si le fichier n'est pas trouvé, utilisez `include()` à la place de `require()`.
